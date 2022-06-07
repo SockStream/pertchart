@@ -7,17 +7,17 @@ with open(path.join(work_dir, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
-  name = 'pertchart',
-  packages = ['pertchart'],
-  version = '0.5.1',
+  name = 'LDVEH_pertChart',
+  packages = ['LDVEH_pertChart'],
+  version = '0.0.1',
   license='MIT',
-  description = 'PERT chart generator',
+  description = 'chart generator for "Livres Dont Vous Etes le Héros"',
   long_description=long_description,
   long_description_content_type='text/markdown',
-  author = 'Sisay Chala',
-  author_email = 'sisayie@gmail.com',
-  url = 'https://github.com/sisayie/pertchart',
-  keywords = ['pert chart', 'project plan', 'gantt'],
+  author = 'SockStream',
+  author_email = '',
+  url = 'https://github.com/SockStream/pertchart',
+  keywords = ['pert chart', 'project plan', 'LDVEH'],
   install_requires=[
           'graphviz'
       ],

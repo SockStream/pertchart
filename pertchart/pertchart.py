@@ -10,6 +10,7 @@
 #! conda install python-graphviz
 
 from graphviz import Digraph, nohtml
+from pathlib import Path
 import ast
 import sys
 import json
@@ -65,6 +66,7 @@ class PertChart:
         '''
     def calculate_values(self, p):
         p1 = p
+        return p1
         for k, v in p1.items():
             pred = p1[k]["pred"]
             
@@ -86,7 +88,7 @@ class PertChart:
                 #p1[k]['ES'] = max([p1[pred[j]['EF'] for j in range(len(pred)
         return p1
         
-    def create_pert_chart(self, task_list, fill_color = 'grey93', line_color = 'blue'):
+    def create_pert_chart(self, task_list, output_filename,  fill_color = 'grey93', line_color = 'blue'):
         """Gets task list, optional fill_color and line_color and generates PERT chart
             
         Parameters
@@ -114,7 +116,7 @@ class PertChart:
         a = task_list
         # Graph Instance
         g = Digraph('g', 
-                    filename='PERT.gv',
+                    filename= output_filename,
                     node_attr={'shape': 'Mrecord', 
                                'height': '.1'})
 
@@ -148,7 +150,9 @@ class PertChart:
             g.node(a[k]["Tid"],
                 nohtml('<f0>' +
                     a[k]["Tid"] +
-                    ' |{' + str(a[k]["start"]) + '|' + str(a[k]["duration"]) + '|' + str(a[k]["end"]) + '}|<f2>' + a[k]["responsible"]),
+                    #' |{' + str(a[k]["start"]) + '|' + str(a[k]["duration"]) + '|' + str(a[k]["end"]) + '}'
+                    '|<f2>' + 
+                    a[k]["responsible"]),
                     fillcolor=fl_color,
                     style='filled',
                     color=ln_color
@@ -190,7 +194,7 @@ class PertChart:
             print(e)
         '''finally:
             print("PERT chart generation completed")'''
-        print(g)
+        #print(g)
         g.view()
 
 if __name__ == '__main__':
@@ -203,11 +207,12 @@ if __name__ == '__main__':
     if len(sys.argv) >=2:
         #print(sys.argv[1])
         filename = sys.argv[1] #"datafile.txt"
+        filename_without_extention = Path(filename).stem
         #get data from file
         task_list = pc.getInput(filename)
         # caluculate values
-        task_list = pc.calculate_values(task_list)
+        #task_list = pc.calculate_values(task_list)
         # create pert chart
-        pc.create_pert_chart(task_list)
+        pc.create_pert_chart(task_list,filename_without_extention)
     else:
         print("Usage: pertchart <filename>")
