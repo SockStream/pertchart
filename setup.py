@@ -7,8 +7,8 @@ with open(path.join(work_dir, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
-  name = 'LDVEH_pertChart',
-  packages = ['LDVEH_pertChart'],
+  name = 'pertchart',
+  packages = ['pertchart'],
   version = '0.0.1',
   license='MIT',
   description = 'chart generator for "Livres Dont Vous Etes le Héros"',
